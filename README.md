@@ -1,11 +1,13 @@
 # Webhook
 
-Este código visa criar um webhook para comunicação entre sistemas.
+Este projeto visa criar um chat no terminal do próprio Visual Studio Code, onde o cliente envia a mensagem para o servidor, e aparece em tempo real no servidor, e vice-versa.
 
 ## ⚙️ Ferramentas e Tecnologias
 
 - Visual Studio Code
 - Python
+- Webhook
+- RSA Algorithm
 
 ## ⚖️ Licença
 
