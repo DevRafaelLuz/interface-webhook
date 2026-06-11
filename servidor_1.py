@@ -33,9 +33,7 @@ def greatest_common_divisor(x, y):
 def generate_rsa_keys(prime_p, prime_q):
     modulus = prime_p * prime_q
     totient = (prime_p - 1) * (prime_q - 1)
-    public_exponent = 0
-    for public_exponent in range(2, totient):
-        if greatest_common_divisor(public_exponent, totient) == 1: break
+    public_exponent = 65537
     private_exponent = modular_inverse(public_exponent, totient)
     return public_exponent, private_exponent, modulus
 
@@ -54,7 +52,7 @@ def encrypt_message(message, public_exponent, modulus):
 def decrypt_message(ciphertext, private_exponent, modulus):
     decrypted_int = rsa_modular_exponentiation(ciphertext, private_exponent, modulus)
     try:
-        num_bytes = (modulus.bit_length() + 7) // 8
+        num_bytes = (decrypted_int.bit_length() + 7) // 8
         decrypted_bytes = decrypted_int.to_bytes(num_bytes, byteorder='big')
         
         texto_sujo = decrypted_bytes.decode('utf-8', errors='ignore')
@@ -66,8 +64,8 @@ def decrypt_message(ciphertext, private_exponent, modulus):
     except Exception as e:
         return f'Erro ao decodificar os bytes: {str(e)}'
 
-PRIMO_P = 1130043590518296316104847926131
-PRIMO_Q = 1270273575441551061217036412421
+PRIMO_P = 7917210177204817354392263458471664648979437923128520344717778244309865160194258358194152591075588985530388375991329930985649302403529738345960035153181187
+PRIMO_Q = 12328745139396164590855442566730055945087315531204081070264540474149884124380143510452663163641828389261926376580099101648993474483353766504535847004739631
 
 meu_e, meu_d, meu_n = generate_rsa_keys(PRIMO_P, PRIMO_Q)
 chave_publica_b = None
